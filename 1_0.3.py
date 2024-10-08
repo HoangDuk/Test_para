@@ -25,7 +25,7 @@ global SET_LAST_10
 global BEST
 
 # Set up chỉ số -------------------------------------------------------------------
-ITE = 10
+ITE = 1
 epsilon = (-1) * 0.00001
 # 15:   120,    20:    150
 # BREAKLOOP = Data.number_of_cities * 8
@@ -407,7 +407,7 @@ def Tabu_search_for_CVRP(CC):
     return best_fitness, best_sol
 
 # Thư mục chứa các file .txt
-folder_path = "test_data\\data_demand_random\\30\\"
+folder_path = "test_data\\data_demand_random\\10\\"
 # folder_path = "test_data\\Smith\\TSPrd(time)\\Solomon\\50\\0_5TSP_50"
 # folder_path = "test_data\\Smith\\TSPrd(time)\\Solomon\\15"
 
