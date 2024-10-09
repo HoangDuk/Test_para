@@ -416,63 +416,25 @@ txt_files = glob.glob(os.path.join(folder_path, "C201_0.5.dat"))
             # glob.glob(os.path.join(folder_path, "*3.dat"))
 # txt_files = ["test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_1.dat", "test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_2.5.dat", "test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_2.dat", "test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_3.dat"]
 # Tạo một tệp Excel mới
-workbook = openpyxl.Workbook()
-sheet = workbook.active
+# 
 
-# Dòng và cột bắt đầu ghi kết quả
-row = 1
-column = 1
+output_file_path = f"Random_{number_of_cities}_{delta}_{alpha}_{END_SEGMENT}_CL1.txt"
+with open(output_file_path, "w") as output_file:
+    output_file.write("File, Iteration, Best Fitness, Run Time, Best Solution\n")
 
-# Ghi tên file .txt vào cột đầu tiên
 for txt_file in txt_files:
-    sheet.cell(row=row, column=column, value=os.path.basename(txt_file))
-    row += 1
-# Đặt lại dòng và cột cho việc ghi kết quả
-row = 1
-for txt_file in txt_files:
-    column = 2
     with open(txt_file, 'r') as file:
-        # Đọc nội dung từ file .txt và xử lý nó
-        # print(txt_file)
-        # log = os.path.basename(txt_file)+ f'{Data.number_of_cities}_{delta}_{alpha1}_{END_SEGMENT}_CL1_log_new.log'
-        # log_folder = 'Result\log_result'
-        # log_file_path = os.path.join(log_folder, log)
-        # log_file = open(log_file_path, 'w')
-        # sys.stdout = log_file
         Data.read_data_random(txt_file)
-        result = []
-        run_time = []
-        avg = 0
-        avg_run_time = 0
-        best_csv_fitness = 1000000
         for i in range(ITE):
             BEST = []
             print("------------------------",i,"------------------------")
             start_time = time.time()
             best_fitness, best_sol = Tabu_search_for_CVRP(1)
+            end_time = time.time()
+            run_time = end_time - start_time
             print("---------- RESULT ----------")
             print(best_sol)
             print(best_fitness)
-            avg += best_fitness/ITE
-            result.append(best_fitness)
-            # print(Function.Check_if_feasible(best_sol))
-            end_time = time.time()
-            run = end_time - start_time
-            run_time.append(run)
-            avg_run_time += run/ITE
-            sheet.cell(row=row, column=column, value=best_fitness)
-
-            column += 1
-            if best_csv_fitness > best_fitness:
-                best_csv_sol = best_sol
-                best_csv_fitness = best_fitness
-            if i == ITE - 1:
-                sheet.cell(row=row, column=column, value=avg_run_time)
-                sheet.cell(row=row, column=column+1, value=str(best_csv_sol))    
-        # Tăng dòng cho lần chạy tiếp theo
-        row += 1
-    workbook.save(f"Random_{number_of_cities}_{delta}_{alpha}_{END_SEGMENT}_CL1.xlsx")
-        # log_file.close()
-
-workbook.close()
-
+            # Append results to the text file for each iteration
+            with open(output_file_path, "a") as output_file:
+                output_file.write(f"{os.path.basename(txt_file)}, {i}, {best_fitness}, {run_time}, {best_sol}\n")
