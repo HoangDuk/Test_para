@@ -26,7 +26,7 @@ global SET_LAST_10
 global BEST
 
 # Set up chỉ số -------------------------------------------------------------------
-ITE = 10
+ITE = 1
 epsilon = (-1) * 0.00001
 # 15:   120,    20:    150
 # BREAKLOOP = Data.number_of_cities * 8
@@ -411,9 +411,9 @@ folder_path = "test_data/data_demand_random/"+str(number_of_cities)
 # folder_path = "test_data\\Smith\\TSPrd(time)\\Solomon\\15"
 
 # Danh sách tất cả các file .txt trong thư mục
-txt_files = glob.glob(os.path.join(folder_path, "*0.5.dat")) + \
-            glob.glob(os.path.join(folder_path, "*2.dat")) + \
-            glob.glob(os.path.join(folder_path, "*3.dat"))
+txt_files = glob.glob(os.path.join(folder_path, "C101_0.5.dat"))
+            # glob.glob(os.path.join(folder_path, "*2.dat")) + \
+            # glob.glob(os.path.join(folder_path, "*3.dat"))
 # txt_files = ["test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_1.dat", "test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_2.5.dat", "test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_2.dat", "test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_3.dat"]
 # Tạo một tệp Excel mới
 workbook = openpyxl.Workbook()
