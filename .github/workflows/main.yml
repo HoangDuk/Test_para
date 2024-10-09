@@ -34,7 +34,10 @@ jobs:
           DELTA: ${{ matrix.delta }}
           ALPHA: ${{ matrix.alpha }}
           END_SEGMENT: ${{ matrix.end_segment }}
-
+      
+      - name: List files in the directory
+        run: ls -l Result/excel_result/
+      
       - name: Upload result Excel file as artifact
         uses: actions/upload-artifact@v4
         with:
