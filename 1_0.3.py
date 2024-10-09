@@ -468,10 +468,10 @@ for txt_file in txt_files:
                 best_csv_fitness = best_fitness
             if i == ITE - 1:
                 sheet.cell(row=row, column=column, value=avg_run_time)
-                sheet.cell(row=row, column=column+1, value=str(best_csv_sol))
-            workbook.save(f"Result\excel_result\Random_{number_of_cities}_{delta}_{alpha[0]}_{END_SEGMENT}_CL1.xlsx")
+                sheet.cell(row=row, column=column+1, value=str(best_csv_sol))    
         # Tăng dòng cho lần chạy tiếp theo
         row += 1
+    workbook.save(f"Result\excel_result\Random_{number_of_cities}_{delta}_{alpha[0]}_{END_SEGMENT}_CL1.xlsx")
         # log_file.close()
 
 workbook.close()
