@@ -28,7 +28,7 @@ jobs:
         run: pip install -r requirements.txt
         
       - name: Run main.py
-        run: python 1_0.3.py > Random_${{ matrix.number_of_cities }}_${{ matrix.delta }}_${{ matrix.alpha}}_${{ matrix.end_segment }}_CL1.xlsx
+        run: python 1_0.3.py > Random_${{ matrix.number_of_cities }}_${{ matrix.delta }}_${{ matrix.alpha}}_${{ matrix.end_segment }}_CL1.txt
         env:
           NUMBER_OF_CITIES: ${{ matrix.number_of_cities }}
           DELTA: ${{ matrix.delta }}
@@ -40,4 +40,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: excel-results-${{ matrix.number_of_cities }}-${{ matrix.delta }}-${{ matrix.alpha }}-${{ matrix.end_segment }}
-          path: Random_${{ matrix.number_of_cities }}_${{ matrix.delta }}_${{ matrix.alpha}}_${{ matrix.end_segment }}_CL1.xlsx
+          path: Random_${{ matrix.number_of_cities }}_${{ matrix.delta }}_${{ matrix.alpha}}_${{ matrix.end_segment }}_CL1.txt
