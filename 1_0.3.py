@@ -26,19 +26,20 @@ global SET_LAST_10
 global BEST
 
 # Set up chỉ số -------------------------------------------------------------------
-ITE = 1
+ITE = 10
 epsilon = (-1) * 0.00001
 # 15:   120,    20:    150
 # BREAKLOOP = Data.number_of_cities * 8
 LOOP_IMPROVED = 0
 SET_LAST_10 = [] 
 BEST = []
-number_of_cities = int(os.getenv('NUMBER_OF_CITIES', '10')) 
+number_of_cities = int(os.getenv('NUMBER_OF_CITIES', '30')) 
 delta = float(os.getenv('DELTA', '0.3'))
 alpha = json.loads(os.getenv('ALPHA', '[0.5, 0.3, 0.1]'))
 END_SEGMENT = int(os.getenv('END_SEGMENT', '100'))
 
 SEGMENT = 100
+solution_pack_len = 0
 def roulette_wheel_selection(population, fitness_scores):
     total_fitness = sum(fitness_scores)
     probabilities = [score / total_fitness for score in fitness_scores]
@@ -267,7 +268,7 @@ def Tabu_search(init_solution, tabu_tenure, CC, first_time, Data1, index_conside
             current_fitness = current_neighborhood[index_best_nei][1][index[index_best_nei]][1][0]
             current_truck_time = current_neighborhood[index_best_nei][1][index[index_best_nei]][1][1]
             current_sum_fitness = current_neighborhood[index_best_nei][1][index[index_best_nei]][1][2]
-            print(current_fitness, current_sol)
+            # print(current_fitness, current_sol)
             Data1.append(current_fitness)
             Data1.append(current_sol)
             # SET_LAST_10.append([current_sol, [current_fitness, current_truck_time]])
@@ -327,10 +328,10 @@ def Tabu_search(init_solution, tabu_tenure, CC, first_time, Data1, index_conside
             # else:
             #     i += 1
             i+=1
-        print("-------",T,"--------")
-        print(best_fitness)
-        print(T, best_sol, "\n", best_fitness)
-        print(used, score, sum(used))
+        # print("-------",T,"--------")
+        # print(best_fitness)
+        # print(T, best_sol, "\n", best_fitness)
+        # print(used, score, sum(used))
 
         T += 1
         # if best_fitness - prev_f < epsilon:
@@ -372,14 +373,13 @@ def Tabu_search_for_CVRP(CC):
     # print(best_sol) 
     # print(best_fitness)
     # print(Function.Check_if_feasible(best_sol))
-    solution_pack_len = 5
     best_sol, best_fitness, result_print, solution_pack, Data1 = Tabu_search(init_solution=current_sol, tabu_tenure=Data.number_of_cities-1, CC=CC, first_time=True, Data1=Data1, index_consider_elite_set=0)
     for pi in range(solution_pack_len):
-        print("+++++++++++++++++++++++++",len(solution_pack),"+++++++++++++++++++++++++",)
-        for iiii in range(len(solution_pack)):
-            print(solution_pack[iiii][0])
-            print(solution_pack[iiii][1][0])
-            print("$$$$$$$$$$$$$$")
+        # print("+++++++++++++++++++++++++",len(solution_pack),"+++++++++++++++++++++++++",)
+        # for iiii in range(len(solution_pack)):
+        #     print(solution_pack[iiii][0])
+        #     print(solution_pack[iiii][1][0])
+        #     print("$$$$$$$$$$$$$$")
         if pi < len(solution_pack):
             current_neighborhood5 = Neighborhood.swap_two_array(solution_pack[pi][0])
             best_sol_in_brnei = current_neighborhood5[0][0]
@@ -392,9 +392,9 @@ def Tabu_search_for_CVRP(CC):
             temp = ["break", "break", "break", "break", "break", "break", "break"]
             Data1.append(temp)
             best_sol1, best_fitness1, result_print1, solution_pack1, Data1 = Tabu_search(init_solution=best_sol_in_brnei, tabu_tenure=Data.number_of_cities-1, CC=CC, first_time=False, Data1=Data1, index_consider_elite_set=pi+1)
-            print("-----------------", pi, "------------------------")
-            print(best_sol1)
-            print(best_fitness1)
+            # print("-----------------", pi, "------------------------")
+            # print(best_sol1)
+            # print(best_fitness1)
             if best_fitness1 - best_fitness < epsilon:
                 best_sol = best_sol1
                 best_fitness = best_fitness1
@@ -450,12 +450,12 @@ for txt_file in txt_files:
             # print("------------------------",i,"------------------------")
             start_time = time.time()
             best_fitness, best_sol = Tabu_search_for_CVRP(1)
-            print("---------- RESULT ----------")
-            print(best_sol)
-            print(best_fitness)
+            # print("---------- RESULT ----------")
+            # print(best_sol)
+            # print(best_fitness)
             avg += best_fitness/ITE
             result.append(best_fitness)
-            print(Function.Check_if_feasible(best_sol))
+            # print(Function.Check_if_feasible(best_sol))
             end_time = time.time()
             run = end_time - start_time
             run_time.append(run)
