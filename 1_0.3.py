@@ -33,10 +33,10 @@ epsilon = (-1) * 0.00001
 LOOP_IMPROVED = 0
 SET_LAST_10 = [] 
 BEST = []
-number_of_cities = int(sys.argv[1])
-delta = float(sys.argv[2])
-alpha = json.loads(sys.argv[3])
-END_SEGMENT = int(sys.argv[4])
+number_of_cities = int(os.getenv('NUMBER_OF_CITIES', '10')) 
+delta = float(os.getenv('DELTA', '0.3'))
+alpha = json.loads(os.getenv('ALPHA', '[0.5, 0.3, 0.1]'))
+END_SEGMENT = int(os.getenv('END_SEGMENT', '100'))
 
 SEGMENT = 100
 solution_pack_len = 0
