@@ -28,13 +28,14 @@ jobs:
         run: pip install -r requirements.txt
         
       - name: Run main.py
-        run: python 1_0.3.py
+        run: python 1_0.3.py > Random_${{ matrix.number_of_cities }}_${{ matrix.delta }}_${{ matrix.alpha}}_${{ matrix.end_segment }}_CL1.xlsx
         env:
           NUMBER_OF_CITIES: ${{ matrix.number_of_cities }}
           DELTA: ${{ matrix.delta }}
           ALPHA: ${{ matrix.alpha }}
           END_SEGMENT: ${{ matrix.end_segment }}
-      
+      - name: Check
+        run: ls
       - name: Upload result Excel file as artifact
         uses: actions/upload-artifact@v4
         with:

@@ -33,7 +33,7 @@ epsilon = (-1) * 0.00001
 LOOP_IMPROVED = 0
 SET_LAST_10 = [] 
 BEST = []
-number_of_cities = int(os.getenv('NUMBER_OF_CITIES', '30')) 
+number_of_cities = int(os.getenv('NUMBER_OF_CITIES', '10')) 
 delta = float(os.getenv('DELTA', '0.3'))
 alpha = json.loads(os.getenv('ALPHA', '[0.5, 0.3, 0.1]'))
 END_SEGMENT = int(os.getenv('END_SEGMENT', '100'))
@@ -411,7 +411,7 @@ folder_path = "test_data/data_demand_random/"+str(number_of_cities)
 # folder_path = "test_data\\Smith\\TSPrd(time)\\Solomon\\15"
 
 # Danh sách tất cả các file .txt trong thư mục
-txt_files = glob.glob(os.path.join(folder_path, "C101_0.5.dat"))
+txt_files = glob.glob(os.path.join(folder_path, "C201_0.5.dat"))
             # glob.glob(os.path.join(folder_path, "*2.dat")) + \
             # glob.glob(os.path.join(folder_path, "*3.dat"))
 # txt_files = ["test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_1.dat", "test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_2.5.dat", "test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_2.dat", "test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_3.dat"]
@@ -447,12 +447,12 @@ for txt_file in txt_files:
         best_csv_fitness = 1000000
         for i in range(ITE):
             BEST = []
-            # print("------------------------",i,"------------------------")
+            print("------------------------",i,"------------------------")
             start_time = time.time()
             best_fitness, best_sol = Tabu_search_for_CVRP(1)
-            # print("---------- RESULT ----------")
-            # print(best_sol)
-            # print(best_fitness)
+            print("---------- RESULT ----------")
+            print(best_sol)
+            print(best_fitness)
             avg += best_fitness/ITE
             result.append(best_fitness)
             # print(Function.Check_if_feasible(best_sol))
