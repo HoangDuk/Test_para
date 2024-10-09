@@ -7,8 +7,14 @@ permissions:
 
 jobs:
   test:
-    name: Run test
+    name: Run test with multiple configurations
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        number_of_cities: [30, 50]
+        delta: [0.3, 0.6]
+        alpha: ['[0.5, 0.3, 0.1]', '[0.3, 0.2, 0.1]']
+        end_segment: [50, 100, 150]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,9 +29,14 @@ jobs:
         
       - name: Run main.py
         run: python 1_0.3.py
+        env:
+          NUMBER_OF_CITIES: ${{ matrix.number_of_cities }}
+          DELTA: ${{ matrix.delta }}
+          ALPHA: ${{ matrix.alpha }}
+          END_SEGMENT: ${{ matrix.end_segment }}
 
       - name: Upload result Excel file as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: excel-results
-          path: Result/excel_result/Random_${{ env.DATA_NUMBER_OF_CITIES }}_${{ env.DELTA }}_${{ env.ALPHA1 }}_${{ env.END_SEGMENT }}_CL1.xlsx
+          name: excel-results-${{ matrix.number_of_cities }}-${{ matrix.delta }}-${{ matrix.alpha }}-${{ matrix.end_segment }}
+          path: Result/excel_result/Random_${{ matrix.number_of_cities }}_${{ matrix.delta }}_${{ matrix.alpha }}_${{ matrix.end_segment }}_CL1.xlsx
