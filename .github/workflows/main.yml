@@ -40,4 +40,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: excel-results-${{ matrix.number_of_cities }}-${{ matrix.delta }}-${{ matrix.alpha }}-${{ matrix.end_segment }}
-          path: Random_${{ matrix.number_of_cities }}_${{ matrix.delta }}_${{matrix.alpha}}_${{matrix.end_segment}}_CL1.xlsx
+          path: Random_*_CL1.xlsx
