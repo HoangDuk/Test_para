@@ -33,7 +33,7 @@ epsilon = (-1) * 0.00001
 LOOP_IMPROVED = 0
 SET_LAST_10 = [] 
 BEST = []
-number_of_cities = int(os.getenv('NUMBER_OF_CITIES', '30')) 
+number_of_cities = int(os.getenv('NUMBER_OF_CITIES', '10')) 
 delta = float(os.getenv('DELTA', '0.3'))
 alpha = json.loads(os.getenv('ALPHA', '[0.5, 0.3, 0.1]'))
 END_SEGMENT = int(os.getenv('END_SEGMENT', '100'))
@@ -406,7 +406,7 @@ def Tabu_search_for_CVRP(CC):
     return best_fitness, best_sol
 
 # Thư mục chứa các file .txt
-folder_path = "test_data\\data_demand_random\\"+str(number_of_cities)
+folder_path = "test_data/data_demand_random/"+str(number_of_cities)
 # folder_path = "test_data\\Smith\\TSPrd(time)\\Solomon\\50\\0_5TSP_50"
 # folder_path = "test_data\\Smith\\TSPrd(time)\\Solomon\\15"
 
@@ -471,7 +471,7 @@ for txt_file in txt_files:
                 sheet.cell(row=row, column=column+1, value=str(best_csv_sol))    
         # Tăng dòng cho lần chạy tiếp theo
         row += 1
-    workbook.save(f"Result\excel_result\Random_{number_of_cities}_{delta}_{alpha[0]}_{END_SEGMENT}_CL1.xlsx")
+    workbook.save(f"Result/excel_result/Random_{number_of_cities}_{delta}_{alpha}_{END_SEGMENT}_CL1.xlsx")
         # log_file.close()
 
 workbook.close()
