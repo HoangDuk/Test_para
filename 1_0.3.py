@@ -471,7 +471,7 @@ for txt_file in txt_files:
                 sheet.cell(row=row, column=column+1, value=str(best_csv_sol))    
         # Tăng dòng cho lần chạy tiếp theo
         row += 1
-    workbook.save(f"Result/excel_result/Random_{number_of_cities}_{delta}_{alpha}_{END_SEGMENT}_CL1.xlsx")
+    workbook.save(f"Random_{number_of_cities}_{delta}_{alpha}_{END_SEGMENT}_CL1.xlsx")
         # log_file.close()
 
 workbook.close()
