@@ -36,7 +36,7 @@ jobs:
           END_SEGMENT: ${{ matrix.end_segment }}
 
       - name: Upload result Excel file as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: excel-results-${{ matrix.number_of_cities }}-${{ matrix.delta }}-${{ matrix.alpha }}-${{ matrix.end_segment }}
           path: Result/excel_result/Random_${{ matrix.number_of_cities }}_${{ matrix.delta }}_${{ matrix.alpha[0] }}_${{ matrix.end_segment }}_CL1.xlsx
