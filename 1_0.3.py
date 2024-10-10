@@ -26,7 +26,7 @@ global SET_LAST_10
 global BEST
 
 # Set up chỉ số -------------------------------------------------------------------
-ITE = 10
+ITE = 1
 epsilon = (-1) * 0.00001
 # 15:   120,    20:    150
 # BREAKLOOP = Data.number_of_cities * 8
@@ -37,7 +37,7 @@ number_of_cities = int(os.getenv('NUMBER_OF_CITIES', '30'))
 delta = float(os.getenv('DELTA', '0.3'))
 alpha = json.loads(os.getenv('ALPHA', '[0.5, 0.3, 0.1]'))
 END_SEGMENT = int(os.getenv('END_SEGMENT', '100'))
-
+iteration = int(os.getenv('ITERATION', '1'))
 SEGMENT = 100
 solution_pack_len = 0
 def roulette_wheel_selection(population, fitness_scores):
@@ -471,7 +471,7 @@ for txt_file in txt_files:
                 sheet.cell(row=row, column=column+1, value=str(best_csv_sol))    
         # Tăng dòng cho lần chạy tiếp theo
         row += 1
-    workbook.save(f"Random_{number_of_cities}_{delta}_{alpha}_{END_SEGMENT}_CL1.xlsx")
+    workbook.save(f"Random_{number_of_cities}_{delta}_{alpha}_{END_SEGMENT}_CL1_{iteration}.xlsx")
         # log_file.close()
 
 workbook.close()

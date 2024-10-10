@@ -14,6 +14,7 @@ import csv
 import numpy as np
 import math
 import sys
+import json
 global LOOP
 global tabu_tenure
 global best_sol
@@ -33,11 +34,12 @@ LOOP_IMPROVED = 0
 SET_LAST_10 = [] 
 BEST = []
 # 
-delta = 0.3
-alpha1 = 0.5
-alpha2 = 0.3
-alpha3 = 0.1
-theta = 0.5 #0.5 1 2
+number_of_cities = int(os.getenv('NUMBER_OF_CITIES', '50')) 
+delta = float(os.getenv('DELTA', '0.3'))
+alpha = json.loads(os.getenv('ALPHA', '[0.5, 0.3, 0.1]'))
+theta = int(os.getenv('theta', '0.5'))
+
+solution_pack_len = 0
 def roulette_wheel_selection(population, fitness_scores):
     total_fitness = sum(fitness_scores)
     probabilities = [score / total_fitness for score in fitness_scores]
@@ -311,11 +313,11 @@ def Tabu_search(init_solution, tabu_tenure, CC, first_time, Data1, index_conside
 
             used[choose] += 1
             if flag == True:
-                score[choose] += alpha1
+                score[choose] += alpha[0]
             elif current_fitness - prev_fitness < epsilon:
-                score[choose] += alpha2
+                score[choose] += alpha[1]
             else:
-                score[choose] += alpha3
+                score[choose] += alpha[2]
 
             for j in range(len(nei_set)):
                 if used[j] == 0:
@@ -371,7 +373,6 @@ def Tabu_search_for_CVRP(CC):
     # print(best_sol) 
     # print(best_fitness)
     # print(Function.Check_if_feasible(best_sol))
-    solution_pack_len = 5
     best_sol, best_fitness, result_print, solution_pack, Data1 = Tabu_search(init_solution=current_sol, tabu_tenure=Data.number_of_cities-1, CC=CC, first_time=True, Data1=Data1, index_consider_elite_set=0)
     for pi in range(solution_pack_len):
         print("+++++++++++++++++++++++++",len(solution_pack),"+++++++++++++++++++++++++",)
@@ -405,7 +406,7 @@ def Tabu_search_for_CVRP(CC):
     return best_fitness, best_sol
 
 # Thư mục chứa các file .txt
-folder_path = "test_data\\data_demand_random\\30\\"
+folder_path = "test_data/data_demand_random/"+str(number_of_cities)
 # folder_path = "test_data\\Smith\\TSPrd(time)\\Solomon\\50\\0_5TSP_50"
 # folder_path = "test_data\\Smith\\TSPrd(time)\\Solomon\\15"
 
@@ -434,11 +435,11 @@ for txt_file in txt_files:
     with open(txt_file, 'r') as file:
         # Đọc nội dung từ file .txt và xử lý nó
         # print(txt_file)
-        log = os.path.basename(txt_file)+ f'{Data.number_of_cities}_{delta}_{alpha1}_CL2.log'
-        log_folder = 'Result\log_result'
-        log_file_path = os.path.join(log_folder, log)
-        log_file = open(log_file_path, 'w')
-        sys.stdout = log_file
+        # log = os.path.basename(txt_file)+ f'{number_of_cities}_{delta}_{alpha}_CL2.log'
+        # log_folder = 'Result\log_result'
+        # log_file_path = os.path.join(log_folder, log)
+        # log_file = open(log_file_path, 'w')
+        # sys.stdout = log_file
         Data.read_data_random(txt_file)
         result = []
         run_time = []
@@ -469,7 +470,7 @@ for txt_file in txt_files:
             if i == ITE - 1:
                 sheet.cell(row=row, column=column, value=avg_run_time)
                 sheet.cell(row=row, column=column+1, value=str(best_csv_sol))
-            workbook.save(f"Result\excel_result\log_new_new_Smith_{Data.number_of_cities}_{delta}_{alpha1}_{theta}_CL2.xlsx")
+            workbook.save(f"Random_{number_of_cities}_{delta}_{alpha}_{theta}_CL2.xlsx")
         # Tăng dòng cho lần chạy tiếp theo
         row += 1
         log_file.close()
