@@ -15,8 +15,7 @@ jobs:
         delta: [0.3, 0.6]
         alpha: ['[0.5, 0.3, 0.1]', '[0.3, 0.2, 0.1]']
         end_segment: [50, 100, 150]
-        iteration: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  # Thêm biến iteration để lặp job 10 lần
-        data_set: ['C101_0.5.dat', 'C201_0.5.dat', 'R101_0.5.dat', 'RC101_0.5.dat', 'C101_2.dat', 'C201_2.dat', 'R101_2.dat', 'RC101_2.dat', 'C101_3.dat', 'C201_3.dat', 'R101_3.dat', 'RC101_3.dat']
+        data_set: ["C101", "C201", "R101", "RC101"]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -40,7 +39,7 @@ jobs:
       - name: Upload result Excel file as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: excel-results-${{ matrix.number_of_cities }}-${{ matrix.delta }}-${{ matrix.alpha }}-${{ matrix.end_segment }}-${{ matrix.iteration }}-${{ matrix.data_set }}  # Thêm iteration vào tên file
+          name: excel-results-${{ matrix.number_of_cities }}-${{ matrix.delta }}-${{ matrix.alpha }}-${{ matrix.end_segment }}-${{ matrix.data_set }}  # Thêm iteration vào tên file
           path: Random_*_CL1.xlsx
 
   summary:
