@@ -417,9 +417,9 @@ folder_path = "test_data/data_demand_random/"+str(number_of_cities)
 # txt_files = ['test_data/data_demand_random/30/C101_0.5.dat', 'test_data/data_demand_random/30/C201_0.5.dat', 'test_data/data_demand_random/30/R101_0.5.dat', 'test_data/data_demand_random/30/RC101_0.5.dat', 'test_data/data_demand_random/30/C101_2.dat', 'test_data/data_demand_random/30/C201_2.dat', 'test_data/data_demand_random/30/R101_2.dat', 'test_data/data_demand_random/30/RC101_2.dat', 'test_data/data_demand_random/30/C101_3.dat', 'test_data/data_demand_random/30/C201_3.dat', 'test_data/data_demand_random/30/R101_3.dat', 'test_data/data_demand_random/30/RC101_3.dat']
 # txt_files = ["test_data/Smith/TSPrd(time)/Solomon/15/RC101_1.dat", "test_data/Smith/TSPrd(time)/Solomon/15/RC101_2.5.dat", "test_data/Smith/TSPrd(time)/Solomon/15/RC101_2.dat", "test_data/Smith/TSPrd(time)/Solomon/15/RC101_3.dat"]
 # Tạo một tệp Excel mới
-txt_files = glob.glob(os.path.join(folder_path, os.getenv("data_set") + "*_0.5.dat")) + \
-            glob.glob(os.path.join(folder_path, os.getenv("data_set") + "*2.dat")) + \
-            glob.glob(os.path.join(folder_path, os.getenv("data_set") + "*3.dat"))
+txt_files = glob.glob(os.path.join(folder_path, data_set + "*_0.5.dat")) + \
+            glob.glob(os.path.join(folder_path, data_set + "*2.dat")) + \
+            glob.glob(os.path.join(folder_path, data_set + "*3.dat"))
 workbook = openpyxl.Workbook()
 sheet = workbook.active
 
