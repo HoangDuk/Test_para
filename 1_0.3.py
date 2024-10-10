@@ -37,7 +37,7 @@ number_of_cities = int(os.getenv('NUMBER_OF_CITIES', '30'))
 delta = float(os.getenv('DELTA', '0.3'))
 alpha = json.loads(os.getenv('ALPHA', '[0.5, 0.3, 0.1]'))
 END_SEGMENT = int(os.getenv('END_SEGMENT', '100'))
-data_set = os.getenv('DATA_SET', 'C101_0.5.dat')
+data_set = os.getenv('DATA_SET', 'C101')
 SEGMENT = 100
 solution_pack_len = 0
 def roulette_wheel_selection(population, fitness_scores):
@@ -475,7 +475,7 @@ for txt_file in txt_files:
                 sheet.cell(row=row, column=column+1, value=str(best_csv_sol))    
         # Tăng dòng cho lần chạy tiếp theo
         row += 1
-    workbook.save(f"Random_{os.getenv("data_set")}_{number_of_cities}_{delta}_{alpha}_{END_SEGMENT}_CL1.xlsx")
+    workbook.save(f"Random_{data_set}_{number_of_cities}_{delta}_{alpha}_{END_SEGMENT}_CL1.xlsx")
         # log_file.close()
 
 workbook.close()
