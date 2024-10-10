@@ -407,15 +407,17 @@ def Tabu_search_for_CVRP(CC):
 
 # Thư mục chứa các file .txt
 folder_path = "test_data/data_demand_random/"+str(number_of_cities)
-# folder_path = "test_data\\Smith\\TSPrd(time)\\Solomon\\50\\0_5TSP_50"
-# folder_path = "test_data\\Smith\\TSPrd(time)\\Solomon\\15"
+# folder_path = "test_data/Smith/TSPrd(time)/Solomon/50/0_5TSP_50"
+# folder_path = "test_data/Smith/TSPrd(time)/Solomon/15"
 
 # Danh sách tất cả các file .txt trong thư mục
-txt_files = glob.glob(os.path.join(folder_path, "*0.5.dat")) + \
-            glob.glob(os.path.join(folder_path, "*2.dat")) + \
-            glob.glob(os.path.join(folder_path, "*3.dat"))
-# txt_files = ["test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_1.dat", "test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_2.5.dat", "test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_2.dat", "test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_3.dat"]
+# txt_files = glob.glob(os.path.join(folder_path, "*0.5.dat")) + \
+#             glob.glob(os.path.join(folder_path, "*2.dat")) + \
+#             glob.glob(os.path.join(folder_path, "*3.dat"))
+# txt_files = ['test_data/data_demand_random/30/C101_0.5.dat', 'test_data/data_demand_random/30/C201_0.5.dat', 'test_data/data_demand_random/30/R101_0.5.dat', 'test_data/data_demand_random/30/RC101_0.5.dat', 'test_data/data_demand_random/30/C101_2.dat', 'test_data/data_demand_random/30/C201_2.dat', 'test_data/data_demand_random/30/R101_2.dat', 'test_data/data_demand_random/30/RC101_2.dat', 'test_data/data_demand_random/30/C101_3.dat', 'test_data/data_demand_random/30/C201_3.dat', 'test_data/data_demand_random/30/R101_3.dat', 'test_data/data_demand_random/30/RC101_3.dat']
+# txt_files = ["test_data/Smith/TSPrd(time)/Solomon/15/RC101_1.dat", "test_data/Smith/TSPrd(time)/Solomon/15/RC101_2.5.dat", "test_data/Smith/TSPrd(time)/Solomon/15/RC101_2.dat", "test_data/Smith/TSPrd(time)/Solomon/15/RC101_3.dat"]
 # Tạo một tệp Excel mới
+txt_files = glob.glob(os.path.join(folder_path, os.getenv("data_set")))
 workbook = openpyxl.Workbook()
 sheet = workbook.active
 
@@ -471,7 +473,7 @@ for txt_file in txt_files:
                 sheet.cell(row=row, column=column+1, value=str(best_csv_sol))    
         # Tăng dòng cho lần chạy tiếp theo
         row += 1
-    workbook.save(f"Random_{number_of_cities}_{delta}_{alpha}_{END_SEGMENT}_CL1_{iteration}.xlsx")
+    workbook.save(f"Random_{os.getenv("data_set")}_{number_of_cities}_{delta}_{alpha}_{END_SEGMENT}_CL1_{iteration}.xlsx")
         # log_file.close()
 
 workbook.close()
